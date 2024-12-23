@@ -65,20 +65,6 @@ class ApplicationTests {
 	}
 	
 	//@Test
-	void insertMember2() {
-		Member member = Member.builder()
-				.m_id("jj@abc.com")
-				.m_pw("1111")
-				.m_name("jj")
-				.m_nickName("제이제이")
-				.build();
-		
-		member.addMembershipSet(Membership.BLACK);
-		
-		memberRepository.save(member);
-	}
-	
-	//@Test
 	void insertCart() {
 		CartItem cartItem = CartItem.builder()
 				.c_cnt(2)
