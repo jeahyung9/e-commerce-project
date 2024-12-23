@@ -1,6 +1,6 @@
 package com.fullstack.springboot.entity.member;
 
-import java.util.Date;
+import java.time.LocalDate;
 import java.util.HashSet;
 import java.util.Set;
 
@@ -48,9 +48,9 @@ public class Member extends BaseEntity{
 	@Column(nullable = false)
 	private String m_nickName;
 
-	private Date m_birth;// 생일
+	private LocalDate m_birth;// 생일
 	
-	private int m_phoNum;
+	private String m_phoNum;
 	
 	private String m_email;
 	
