@@ -20,18 +20,48 @@ class ApplicationTests {
 	
 	@Test
 	void insertMember() {
-		IntStream.rangeClosed(1, 100).forEach(i -> {
+		
+		Random random = new Random();
+		
+		LocalDate startDate = LocalDate.of(1950, Month.JANUARY, 1); //시작날
+		LocalDate endDate = LocalDate.of(2014, Month.DECEMBER, 31); //종료날
+
+		for(int i = 1; i <= 100; i++) {
+			LocalDate randomDate = RandomDateUtil.generateRandomDate(startDate, endDate); // 랜덤한 날짜 생성
+			
+			//비밀번호 암호화 아직임
 			Member member = Member.builder()
-					.m_id("hogeng" + i + "@abc.com")
+					.m_id("user" + i )
 					.m_pw("1111")
-					.m_name("hogeng" + i)
-					.m_nickName("호갱" + i)
+					.m_name("name" + i)
+					.m_nickName("nickname" + i)
+					.birth(randomDate)
+					.m_phoNum("010-0000-1111")
+					.m_email("user" + i + "@aaa.com")
+					.def_addr("주소" + i)
+					.isMan(i % 2 == 0 ? false : true) // 성비를 50 : 50 으로
+					.ad_agree(random.nextBoolean()) 
+					.info_agree(random.nextBoolean()) // 약관 동의을 랜덤
 					.build();
 			
-			member.addMembershipSet(Membership.USER);
+			if(i<=50) {
+				member.addMembershipSet(Membership.USER); // 50%
+			}
+			else if(i>50 && i<=70) {
+				member.addMembershipSet(Membership.SLIVER); // 20%
+			}
+			else if(i>70 && i<=85) {
+				member.addMembershipSet(Membership.GOLD); // 15%
+			}
+			else if(i>85 && i<=95) {
+				member.addMembershipSet(Membership.PLATINUM); // 10%
+			}
+			else if(i>95 && i<=100) {
+				member.addMembershipSet(Membership.BLACK); // 5%
+			}
 			
 			memberRepository.save(member);
-		});
+		}
 	}
 	
 	//@Test
