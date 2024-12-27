@@ -39,4 +39,8 @@ public class CartItem {
 	   @ManyToOne(fetch = FetchType.LAZY)
 	   private Product product;
 	   
+	   public void changeCnt(int cnt) {
+		   this.c_cnt += cnt;
+	   }
+	   
 	}

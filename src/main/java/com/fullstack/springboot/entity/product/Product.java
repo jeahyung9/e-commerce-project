@@ -9,6 +9,7 @@ import jakarta.persistence.GeneratedValue;
 import jakarta.persistence.GenerationType;
 import jakarta.persistence.Id;
 import jakarta.persistence.ManyToOne;
+import jakarta.persistence.OneToMany;
 import jakarta.persistence.Table;
 import lombok.AllArgsConstructor;
 import lombok.Builder;
@@ -49,12 +50,7 @@ public class Product extends BaseEntity {
 	@ManyToOne(fetch = FetchType.LAZY)
 	private Seller seller; // 판매자 
 
-	
-//	@OneToMany(fetch = FetchType.LAZY)
-//	private ProductImage productImage;
-	
-//	@CreatedDate
-//	@Column(name = "regdate", updatable = false)
-//	private LocalDateTime regDate;//신규 방명록 글의 등록시간.
-	
+	//@OneToMany(fetch = FetchType.LAZY)
+	//private ProductImage productImage;
+
 }
