@@ -81,7 +81,7 @@ public class CartServiceImpl implements CartService {
 	
 	@Override
 	public void CartRemove(Long mno) {
-		
+		String s = "바꿈";
 	}
 	
 	@Override
