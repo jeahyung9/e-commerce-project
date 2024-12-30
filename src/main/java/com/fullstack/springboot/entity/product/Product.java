@@ -48,7 +48,10 @@ public class Product extends BaseEntity {
 	private int p_salesVol; // 판매량
 	
 	@ManyToOne(fetch = FetchType.LAZY)
-	private Seller seller; // 판매자 
+	private Seller seller; // 판매자
+	
+	@OneToMany(fetch = FetchType.LAZY)
+	private Option option; //옵션
 
 	//@OneToMany(fetch = FetchType.LAZY)
 	//private ProductImage productImage;

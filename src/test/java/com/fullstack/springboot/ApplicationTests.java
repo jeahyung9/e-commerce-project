@@ -69,8 +69,13 @@ class ApplicationTests {
 		
 		LocalDate startDate = LocalDate.of(1950, Month.JANUARY, 1); //시작날
 		LocalDate endDate = LocalDate.of(2014, Month.DECEMBER, 31); //종료날
+<<<<<<< HEAD
 		
 		IntStream.rangeClosed(1, 100).forEach(i -> {
+=======
+
+		for(int i = 1; i <= 100; i++) {
+>>>>>>> refs/remotes/origin/master
 			LocalDate randomDate = RandomDateUtil.generateRandomDate(startDate, endDate); // 랜덤한 날짜 생성
 			
 			//비밀번호 암호화 아직임
@@ -79,7 +84,11 @@ class ApplicationTests {
 					.m_pw("1111")
 					.m_name("name" + i)
 					.m_nickName("nickname" + i)
+<<<<<<< HEAD
 					.m_birth(randomDate)
+=======
+					.birth(randomDate)
+>>>>>>> refs/remotes/origin/master
 					.m_phoNum("010-0000-1111")
 					.m_email("user" + i + "@aaa.com")
 					.def_addr("주소" + i)
@@ -105,21 +114,7 @@ class ApplicationTests {
 			}
 			
 			memberRepository.save(member);
-		});
-	}
-	
-	//@Test
-	void insertMember2() {
-		Member member = Member.builder()
-				.m_id("jj@abc.com")
-				.m_pw("1111")
-				.m_name("jj")
-				.m_nickName("제이제이")
-				.build();
-		
-		member.addMembershipSet(Membership.BLACK);
-		
-		memberRepository.save(member);
+		}
 	}
 	
 	//@Test
