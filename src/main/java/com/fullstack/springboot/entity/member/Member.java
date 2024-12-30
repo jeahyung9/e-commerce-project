@@ -1,10 +1,7 @@
 package com.fullstack.springboot.entity.member;
 
 import java.time.LocalDate;
-<<<<<<< HEAD
 import java.util.Date;
-=======
->>>>>>> refs/remotes/origin/master
 import java.util.HashSet;
 import java.util.Set;
 
