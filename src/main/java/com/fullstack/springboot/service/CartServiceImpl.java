@@ -61,6 +61,7 @@ public class CartServiceImpl implements CartService {
 		//동일한 물품이 카트에 존재하는지 여부
 		CartItem cartItem = cartItemRepository.getCi(mno, pno);
 		
+		log.info(cartItem + "이후 확인");
 		if(cartItem == null) {
 			log.info("동일한 품목 없음");
 			cartItem = CartItem.builder()
@@ -70,9 +71,10 @@ public class CartServiceImpl implements CartService {
 					.build();
 		}else {
 			log.info("동일한 품목 있음 : " + cnt + " " + cartItem.getC_cnt() + " = " + cnt + cartItem.getC_cnt());
-			cartItem.changeCnt(cnt);
+			cartItem.changeCnt(cartItem.getC_cnt() + cnt);
 		}
 		
+		log.info(cartItem + "이후 확인");
 		
 		cartItemRepository.save(cartItem);
 		
@@ -80,8 +82,16 @@ public class CartServiceImpl implements CartService {
 	}
 	
 	@Override
+	public List<CartItemDTO> changeCartItem(CartItemDTO cartItemDTO) {
+		CartItem cartItem = cartItemRepository.getCi(cartItemDTO.getMno(), cartItemDTO.getPno());
+		cartItem.changeCnt(cartItemDTO.getC_cnt());
+		cartItemRepository.save(cartItem);
+		return getCartItems(cartItemDTO.getMno());
+	}
+	
+	@Override
 	public void CartRemove(Long mno) {
-		String s = "바꿈";
+		
 	}
 	
 	@Override

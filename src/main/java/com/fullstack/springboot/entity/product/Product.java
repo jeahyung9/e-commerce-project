@@ -1,5 +1,8 @@
 package com.fullstack.springboot.entity.product;
 
+import java.util.ArrayList;
+import java.util.List;
+
 import com.fullstack.springboot.entity.BaseEntity;
 
 import jakarta.persistence.Column;
@@ -50,10 +53,10 @@ public class Product extends BaseEntity {
 	@ManyToOne(fetch = FetchType.LAZY)
 	private Seller seller; // 판매자
 	
-	@OneToMany(fetch = FetchType.LAZY)
-	private Option option; //옵션
-
-	//@OneToMany(fetch = FetchType.LAZY)
-	//private ProductImage productImage;
+	@OneToMany(fetch = FetchType.LAZY, mappedBy="pino")
+    private List<ProductImage> productImage = new ArrayList<>();
+   
+    @OneToMany(fetch = FetchType.LAZY, mappedBy = "optno")
+    private List<Option> option = new ArrayList<>();
 
 }

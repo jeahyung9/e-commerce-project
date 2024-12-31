@@ -118,20 +118,24 @@ class ApplicationTests {
 		cartRepository.save(cart);
 	}
 	
-	//@Test
+	@Test
 	void insertCartItem() {
-		CartItemDTO cartItemDTO = CartItemDTO.builder()
-				.pno(101L)
-				.mno(99L)
-				.cno(7L)
-				.c_cnt(3)
-				.build();
-		
-		List<CartItemDTO> cartItem = cartService.register(cartItemDTO);
-		
-		for(CartItemDTO dto : cartItem) {
-			log.error(dto);
+		CartItemDTO cartItemDTO = null;
+		for(int i = 0; i < 5; i++) {
+			cartItemDTO = CartItemDTO.builder()
+					.pno(i + 2L)
+					.mno(10L)
+					.cno(1L)
+					.c_cnt(3)
+					.build();
+			
+			List<CartItemDTO> cartItem = cartService.register(cartItemDTO);
 		}
+		
+		
+//		for(CartItemDTO dto : cartItem) {
+//			log.error(dto);
+//		}
 	}
 	
 	//@Test

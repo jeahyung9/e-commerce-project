@@ -8,6 +8,8 @@ import com.fullstack.springboot.dto.CartItemDTO;
 public interface CartService {
 
 	public List<CartItemDTO> register(CartItemDTO cartItemDTO);
+	
+	public List<CartItemDTO> changeCartItem(CartItemDTO cartItemDTO);
 
 	public List<CartItemDTO> getCartItems(Long mno);
 	

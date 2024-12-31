@@ -40,7 +40,7 @@ public class CartItem {
 	   private Product product;
 	   
 	   public void changeCnt(int cnt) {
-		   this.c_cnt += cnt;
+		   this.c_cnt = cnt;
 	   }
 	   
 	}
