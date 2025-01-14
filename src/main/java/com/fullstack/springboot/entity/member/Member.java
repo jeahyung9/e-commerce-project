@@ -1,11 +1,8 @@
 package com.fullstack.springboot.entity.member;
 
 import java.time.LocalDate;
-import java.util.Date;
 import java.util.HashSet;
 import java.util.Set;
-
-import org.hibernate.annotations.ColumnDefault;
 
 import com.fullstack.springboot.dto.member.Membership;
 import com.fullstack.springboot.entity.BaseEntity;
