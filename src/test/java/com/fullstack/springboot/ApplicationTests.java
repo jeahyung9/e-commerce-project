@@ -155,18 +155,18 @@ class ApplicationTests {
 	void insertProduct() {
 		IntStream.rangeClosed(1, 100).forEach(i -> {
 			Seller seller = Seller.builder().sno((long)((Math.random() * 30) + 1)).build();
-			Product product = Product.builder()
-					.p_name("상품" + i)
-					.p_content("이 상품은 상품" + i + "입니다")
-					.p_img("image.jpg")
-					.p_price(10000L)
-					.p_salePer(30)
-					.p_stock((int)((Math.random() * 30) + 1))
-					.p_salesVol((int)((Math.random() * 20) + 1))
-					.seller(seller)
-					.build();
-			
-			productRepository.save(product);
+//			Product product = Product.builder()
+//					.p_name("상품" + i)
+//					.p_content("이 상품은 상품" + i + "입니다")
+//					.p_img("image.jpg")
+//					.p_price(10000L)
+//					.p_salePer(30)
+//					.p_stock((int)((Math.random() * 30) + 1))
+//					.p_salesVol((int)((Math.random() * 20) + 1))
+//					.seller(seller)
+//					.build();
+//			
+//			productRepository.save(product);
 		});
 	}
 	
