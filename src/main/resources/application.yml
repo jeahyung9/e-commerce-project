@@ -1,0 +1,38 @@
+#추후 Docker 사용을 위한 application.properites 와 같은 내용의 yml 파일
+
+spring:
+  application:
+    name: 2nd_Project
+
+  datasource:
+    url: jdbc:mysql://localhost:3306/2nd_project #이 url 추후 변경
+    username: kal
+    password: 1234
+    driver-class-name: com.mysql.cj.jdbc.Driver
+
+  jpa:
+    hibernate:
+      ddl-auto: update
+    properties:
+      hibernate:
+        format_sql: true
+    show-sql: true
+
+  thymeleaf:
+    cache: false
+
+  servlet:
+    multipart:
+      enabled: true
+      location: C:\\upload
+      max-request-size: 50MB
+      max-file-size: 10MB
+
+com:
+  fullstack:
+    springboot:
+      uploadPath: upload
+
+logging:
+  level:
+    org.springframework.security.web: trace

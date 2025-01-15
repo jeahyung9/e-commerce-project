@@ -1,6 +1,5 @@
 package com.fullstack.springboot.entity.review;
 
-import org.hibernate.annotations.ColumnDefault;
 
 import com.fullstack.springboot.entity.BaseEntity;
 import com.fullstack.springboot.entity.member.Member;

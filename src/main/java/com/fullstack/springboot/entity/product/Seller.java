@@ -40,7 +40,7 @@ public class Seller extends BaseEntity{
 	@Column(nullable = false)
 	private String businessNum;
 	
-	private int s_num;
+	private String s_num;
 	
 	private String s_email;
 	

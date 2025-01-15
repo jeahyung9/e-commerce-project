@@ -1,5 +1,8 @@
 package com.fullstack.springboot.entity.product;
 
+import java.util.ArrayList;
+import java.util.List;
+
 import com.fullstack.springboot.entity.BaseEntity;
 
 import jakarta.persistence.Column;
@@ -35,7 +38,7 @@ public class Product extends BaseEntity {
 	
 	private String p_content; // 내용
 	
-	private String p_img; // 이미지
+//	private String p_img; // 이미지
 	
 	@Column(nullable = false)
 	private Long p_price; // 가격
@@ -48,12 +51,16 @@ public class Product extends BaseEntity {
 	private int p_salesVol; // 판매량
 	
 	@ManyToOne(fetch = FetchType.LAZY)
-	private Seller seller; // 판매자
+	private Seller seller; // 판매자 
 	
-	@OneToMany(fetch = FetchType.LAZY)
-	private Option option; //옵션
-
-	//@OneToMany(fetch = FetchType.LAZY)
-	//private ProductImage productImage;
-
+	@OneToMany(fetch = FetchType.LAZY, mappedBy="pino")
+	private List<ProductImage> productImage = new ArrayList<>();
+	
+	@OneToMany(fetch = FetchType.LAZY, mappedBy = "optno")
+	private List<Option> option = new ArrayList<>();
+	
+//	@CreatedDate
+//	@Column(name = "regdate", updatable = false)
+//	private LocalDateTime regDate;//신규 방명록 글의 등록시간.
+	
 }

@@ -1,17 +1,10 @@
 package com.fullstack.springboot.entity.order;
 
-import java.sql.Date;
 import java.time.LocalDateTime;
-import java.util.HashSet;
-import java.util.Set;
 
-import org.hibernate.annotations.ColumnDefault;
 import org.springframework.data.annotation.CreatedDate;
-
 import jakarta.persistence.Column;
-import jakarta.persistence.ElementCollection;
 import jakarta.persistence.Entity;
-import jakarta.persistence.FetchType;
 import jakarta.persistence.GeneratedValue;
 import jakarta.persistence.GenerationType;
 import jakarta.persistence.Id;
@@ -28,7 +21,7 @@ import lombok.ToString;
 @AllArgsConstructor
 @NoArgsConstructor
 @Builder
-@Table(name = "prod_order")
+@Table(name = "pro_order")
 public class Order{
 	//주문 entity, orderDetail 에서 개별 상품의 정보를 받아 한번에 저장하고 결제 여부를 판단하게 될 것, Member 과 Join
 	
@@ -38,7 +31,7 @@ public class Order{
 	
 	@Column(nullable = false)
 	@Builder.Default
-	private Long o_totalPrice = 0L; // not null
+	private Long o_totalPrice =0L; // not null
 	
 	private String o_address; // not null
 	

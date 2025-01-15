@@ -1,6 +1,7 @@
 package com.fullstack.springboot.entity.product;
 
 import jakarta.persistence.Entity;
+import jakarta.persistence.FetchType;
 import jakarta.persistence.GeneratedValue;
 import jakarta.persistence.GenerationType;
 import jakarta.persistence.Id;
@@ -18,7 +19,7 @@ import lombok.ToString;
 @AllArgsConstructor
 @NoArgsConstructor
 @Builder
-@Table(name = "pro_option")
+@Table(name="opt")
 public class Option {
 	
 	@Id
@@ -27,6 +28,6 @@ public class Option {
 	
 	private String opt_name;
 	
-	@ManyToOne
+	@ManyToOne(fetch = FetchType.LAZY)
 	private OptionType optionType;
 }

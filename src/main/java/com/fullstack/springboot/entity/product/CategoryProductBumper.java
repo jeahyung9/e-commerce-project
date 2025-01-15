@@ -20,7 +20,7 @@ import lombok.ToString;
 @AllArgsConstructor
 @NoArgsConstructor
 @Builder
-@Table(name="category_product_bumber")
+@Table(name="category_product_bumper")
 public class CategoryProductBumper {
 
 	@Id
@@ -28,7 +28,7 @@ public class CategoryProductBumper {
 	private Long cpno;
 	
 	@ManyToOne
-	//@JoinColumn(name = "cate_ctno")
+	@JoinColumn(name = "cate_ctno")
 	private Category category;
 	
 	@ManyToOne

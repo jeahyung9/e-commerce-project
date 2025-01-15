@@ -20,7 +20,7 @@ public class CustomAccDeniedHandler implements AccessDeniedHandler {
 			AccessDeniedException accessDeniedException) throws IOException, ServletException {
 		Gson gson = new Gson();
 		
-		String jsonStr = gson.toJson(Map.of("error","ERROR_ACCESSDENIED"));
+		String jsonStr = gson.toJson(Map.of("error", "ERROR_ACCESSDENIED"));
 		response.setContentType("application/json; charset=UTF-8");
 		PrintWriter out = response.getWriter();
 		out.print(jsonStr);

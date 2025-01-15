@@ -1,11 +1,10 @@
 package com.fullstack.springboot.entity.member;
 
 import java.time.LocalDate;
-import java.util.Date;
 import java.util.HashSet;
 import java.util.Set;
 
-import org.hibernate.annotations.ColumnDefault;
+import org.springframework.security.crypto.bcrypt.BCryptPasswordEncoder;
 
 import com.fullstack.springboot.dto.member.Membership;
 import com.fullstack.springboot.entity.BaseEntity;
@@ -17,6 +16,7 @@ import jakarta.persistence.FetchType;
 import jakarta.persistence.GeneratedValue;
 import jakarta.persistence.GenerationType;
 import jakarta.persistence.Id;
+import jakarta.persistence.PrePersist;
 import jakarta.persistence.Table;
 import lombok.AllArgsConstructor;
 import lombok.Builder;
@@ -32,6 +32,8 @@ import lombok.ToString;
 @Builder
 @Table(name = "member")
 public class Member extends BaseEntity{
+	
+	
 	
 	@Id
 	@GeneratedValue(strategy = GenerationType.IDENTITY)
@@ -49,10 +51,11 @@ public class Member extends BaseEntity{
 	@Column(nullable = false)
 	private String m_nickName;
 
-	private LocalDate m_birth;// 생일
+	private LocalDate birth;// 생일
 	
 	private String m_phoNum;
 	
+	@Column(nullable = false, unique = true)
 	private String m_email;
 	
 	private String def_addr; //주소(기본 배송지)
@@ -63,8 +66,9 @@ public class Member extends BaseEntity{
 	
 	private boolean info_agree; // 약관-정보제공 동의
 	
+	@Builder.Default
+	private boolean isBan = false; // 추가사항
 	
-	@Column
 	@Builder.Default
 	private Long totalPay = 0L;
 	
@@ -77,5 +81,23 @@ public class Member extends BaseEntity{
 	public void addMembershipSet(Membership userMembership) {
 		membership.add(userMembership);
 	}
+	
+	public void banUser() {
+        this.isBan = true;
+    }
+
+    public void unbanUser() {
+        this.isBan = false;
+    }
+    
+    @PrePersist
+    public void encodePassword() {
+    	if (this.m_pw != null) {
+    		this.m_pw = new BCryptPasswordEncoder().encode(this.m_pw);
+    	}
+    }
+    public void setPw(String str) {
+    this.m_pw = str;}
+    
 	
 }

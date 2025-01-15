@@ -25,7 +25,7 @@ import lombok.ToString;
 @AllArgsConstructor
 @NoArgsConstructor
 @Builder
-@Table(name="product_option_bumber")
+@Table(name="product_option_bumper")
 public class ProductOptionBumper {
 	
 	@Id

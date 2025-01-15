@@ -23,7 +23,7 @@ import lombok.ToString;
 @AllArgsConstructor
 @NoArgsConstructor
 @Builder
-@Table(name="product_QAReply")
+@Table(name="product_qa_reply")
 public class ProQAReply extends BaseEntity {
 	
 	@Id

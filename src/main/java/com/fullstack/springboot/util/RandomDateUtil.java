@@ -6,7 +6,7 @@ import java.time.ZoneOffset;
 import java.time.temporal.ChronoUnit;
 import java.util.concurrent.ThreadLocalRandom;
 
-public class RandomDateUtil {
+public class RandomDateUtil { //랜덤 날짜 생성 (시간 미포함)
 	public static LocalDate generateRandomDate(LocalDate startDay, LocalDate endDay) {
 		
 		//시작일과 종료일의 차
@@ -21,7 +21,7 @@ public class RandomDateUtil {
 		return randomDay; 
 	}
 	
-	public static LocalDateTime generateRandomDateTime(LocalDateTime startDay, LocalDateTime endDay) {
+	public static LocalDateTime generateRandomDateTime(LocalDateTime startDay, LocalDateTime endDay) { // 랜덤 날짜 생성(시간 포함)
 		//시작일과 종료일을 MilliSecond 로 변환
 		long startDateMilli = startDay.toInstant(ZoneOffset.UTC).toEpochMilli();
 		long endDateMilli = endDay.toInstant(ZoneOffset.UTC).toEpochMilli();

@@ -28,7 +28,7 @@ public class MemberAddress{
 	
 	private String addrName;
 	
-	private int postNum;
+	private int phoNum;
 	
 	private String addr;
 	

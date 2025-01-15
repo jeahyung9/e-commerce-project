@@ -25,7 +25,7 @@ import lombok.ToString;
 @AllArgsConstructor
 @NoArgsConstructor
 @Builder
-@Table(name="product_QA")
+@Table(name="product_qa")
 public class ProductQA extends BaseEntity {
 	
 	@Id
