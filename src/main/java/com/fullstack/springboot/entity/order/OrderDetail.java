@@ -1,11 +1,15 @@
 package com.fullstack.springboot.entity.order;
 
+import com.fullstack.springboot.entity.product.OptionDetail;
+import com.fullstack.springboot.entity.review.ProductReview;
+
 import jakarta.persistence.Entity;
 import jakarta.persistence.GeneratedValue;
 import jakarta.persistence.GenerationType;
 import jakarta.persistence.Id;
 import jakarta.persistence.JoinColumn;
 import jakarta.persistence.ManyToOne;
+import jakarta.persistence.OneToOne;
 import jakarta.persistence.Table;
 import lombok.AllArgsConstructor;
 import lombok.Builder;
@@ -34,7 +38,9 @@ public class OrderDetail {
 	//@JoinColumn(name = "order_ono")
 	private Order order;
 	
-//	@ManyToOne
-//	@JoinColumn(name="product_pno")
-//	private Product product;
+	@OneToOne
+	private ProductReview productReview;
+	
+	@ManyToOne
+	private OptionDetail optionDetail;
 }
