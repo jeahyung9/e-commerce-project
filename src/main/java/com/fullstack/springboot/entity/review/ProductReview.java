@@ -4,6 +4,7 @@ import org.hibernate.annotations.ColumnDefault;
 
 import com.fullstack.springboot.entity.BaseEntity;
 import com.fullstack.springboot.entity.member.Member;
+import com.fullstack.springboot.entity.product.OptionDetail;
 import com.fullstack.springboot.entity.product.Product;
 
 import jakarta.persistence.Column;
@@ -47,5 +48,5 @@ public class ProductReview extends BaseEntity {
 	private Member member;
 	
 	@ManyToOne(fetch = FetchType.LAZY)
-	private Product product;
+	private OptionDetail optionDetail;
 }

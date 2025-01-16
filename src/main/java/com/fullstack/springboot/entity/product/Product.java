@@ -80,4 +80,9 @@ public class Product extends BaseEntity {
 		this.p_stock=totalStock;
 	}
 	
+	//내가 추가 테스트
+	public void changeStock(int stock) {
+		this.p_stock = stock;
+	}
+	
 }
