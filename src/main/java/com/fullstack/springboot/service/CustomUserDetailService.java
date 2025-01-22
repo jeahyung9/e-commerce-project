@@ -27,7 +27,7 @@ public class CustomUserDetailService implements UserDetailsService{
 	public UserDetails loadUserByUsername(String username) throws UsernameNotFoundException {
 		System.out.println("loadUserbyUserName " + username);
 		MemberAuthDTO dto = new MemberAuthDTO(memberRepository.findByM_email(username));
-		System.out.println("---------------dto" + dto);
+		System.out.println("---------------dto " + dto);
 		return dto;
 		 
 	}

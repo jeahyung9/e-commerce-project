@@ -44,7 +44,7 @@ public class APIRefreshContoller {
 	
 	@RequestMapping("/api/member/refresh")
 	public Map<String, Object> refresh(@RequestHeader("Authorization") String authHeader,
-			@RequestParam(value = "refreshToken") String refreshToken) {
+										@RequestParam(value = "refreshToken") String refreshToken) {
 		if(refreshToken == null) {
 			throw new CustomJWTException("NULL_REFRESH_TOKEN");
 		}

@@ -64,6 +64,8 @@ class ApplicationTests {
 	
 	@Autowired
 	private MemberService memberService;
+
+	
 	
 	
 
@@ -334,17 +336,23 @@ class ApplicationTests {
 		log.error("어드민 : " + admin);
 	}
 	
-	//@Test
+	@Test
 	void createMember() {
 		Set<Membership> membership = new HashSet<Membership>();
+		
+		LocalDate startDate = LocalDate.of(1950, Month.JANUARY, 1); //시작날
+		LocalDate endDate = LocalDate.of(2014, Month.DECEMBER, 31); //종료날
+		LocalDate randomDate = RandomDateUtil.generateRandomDate(startDate, endDate);
+		
 		membership.add(Membership.USER);
 		MemberDTO memberdto = MemberDTO.builder()
-				.m_id("1")
+				.m_id("good4")
 				.m_pw("1111")
 				.m_name("jason")
 				.m_nickname("jason1")
 				.m_phoNum("000-0000-0000")
-				.m_email("1@a.com")
+				.m_email("good4@a.com")
+				.birth(randomDate)
 				.def_addr("dddddddd")
 				.isMan(false)
 				.ad_agree(false)

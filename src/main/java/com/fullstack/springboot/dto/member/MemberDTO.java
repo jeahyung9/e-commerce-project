@@ -1,13 +1,14 @@
 package com.fullstack.springboot.dto.member;
 
 import java.time.LocalDate;
+import java.util.Collection;
 import java.util.HashMap;
 import java.util.HashSet;
 import java.util.Map;
 import java.util.Set;
 import java.util.stream.Collectors;
 
-
+import org.springframework.security.core.GrantedAuthority;
 import org.springframework.security.core.authority.SimpleGrantedAuthority;
 import org.springframework.security.core.userdetails.User;
 
@@ -66,6 +67,11 @@ public class MemberDTO {
 	        this.isBan = member.isBan();
 	        this.isMan = member.isMan();
 	    }
+
+	public Collection<? extends GrantedAuthority> getAuthorities() {
+		// TODO Auto-generated method stub
+		return null;
+	}
 	  
 /*
 	   @JsonCreator
@@ -106,9 +112,9 @@ public class MemberDTO {
 	      this.totalPay = totalPay;
 	      this.membership = membership;
 	   }
-
+	*/
    public Map<String, Object> getClaims() {
-      Map<String, Object> dataMap = new HashMap<String, Object>();
+      Map<String, Object> dataMap = new HashMap<>();
       
       dataMap.put("mno", mno);
         dataMap.put("m_id", m_id);
@@ -128,6 +134,6 @@ public class MemberDTO {
         
         return dataMap;
    }
-   */
+   
 	   
 }

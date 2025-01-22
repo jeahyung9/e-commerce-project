@@ -53,11 +53,10 @@ public class CustomSecurityConfig {
 		
 		http.headers().httpStrictTransportSecurity().disable(); 
 		
-		http.formLogin(c -> {c.loginPage("/api/member/login")
+		http.formLogin(c -> {c.loginProcessingUrl("/api/member/login")
                 .successHandler(new APILoginSuccessHandler())
                 .failureHandler(new APILoginFailHandler());
 		});
-		
 		//사용자 인증을 처리하는 필터 전에 토큰이 필요한 경로에 대한 필터를 수행하는 필터를 추가
 //		http.addFilter(new JWTCheckFilter());
 		http.addFilterBefore(new JWTCheckFilter(), UsernamePasswordAuthenticationFilter.class);
@@ -68,7 +67,8 @@ public class CustomSecurityConfig {
 		return http.build();
 	}
 	
-	@Bean CorsConfigurationSource corsConfigurationSource() {
+	@Bean 
+	public CorsConfigurationSource corsConfigurationSource() {
 		CorsConfiguration corsConfiguration = new CorsConfiguration();
 		
 		corsConfiguration.setAllowedOriginPatterns(Arrays.asList("*"));

@@ -24,7 +24,7 @@ public class CustomAccDeniedHandler implements AccessDeniedHandler {
 		response.setContentType("application/json; charset=UTF-8");
 		PrintWriter out = response.getWriter();
 		out.print(jsonStr);
-		out.close();
+		out.close(); 
 
 	}
 

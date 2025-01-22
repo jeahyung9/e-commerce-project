@@ -19,6 +19,7 @@ public class JWTUtil {
 	
 	//암호화될 값을 가진 Map 과, Token 의 유지기간(expires) 를 분(int) 으로 할 메서드 정의
 	public static String genToken(Map<String, Object> valueMap, int min) {
+		System.out.println("토큰");
 		//키 생성 로직
 		//1. SecretKey 객체를 Keys 라는 클래스의 메서드를 통해 얻어냄
 		SecretKey key = null;
@@ -31,14 +32,15 @@ public class JWTUtil {
 		
 		//2. JWT 객체를 이용해서 헤더 정보, claims(=메인 정보),? , 보존 기간을 설정하고 생성된 Secret Key 로 서명을 해줌
 		//이 서명을 유일성을 보장받기 때문에 절대 변조가 불가능
-		String jwtStr = Jwts.builder().setHeader(Map.of("typ", "JWT"))
-					.setClaims(valueMap)
-					.setIssuedAt(Date.from(ZonedDateTime.now().toInstant()))
-					.setExpiration(Date.from(ZonedDateTime.now().plusMinutes(min).toInstant()))
-					.signWith(key)
-					.compact();
+//		String jwtStr = Jwts.builder().setHeader(Map.of("typ", "JWT"))
+//					.setClaims(valueMap)
+//					.setIssuedAt(Date.from(ZonedDateTime.now().toInstant()))
+//					.setExpiration(Date.from(ZonedDateTime.now().plusMinutes(min).toInstant()))
+//					.signWith(key)
+//					.compact();
+		String jwtToken = Jwts.builder().header().add(Map.of("typ","JWT")).and().claims(valueMap).issuedAt(Date.from(ZonedDateTime.now().toInstant())).signWith(key).compact();
 		
-		return jwtStr;
+		return jwtToken;
 		
 		/*
 		 * JWT 토큰 : 크게 Access, Refresh 로 나뉘는데 토큰을 생성할 때 일반적으로 2개 모두 생성함
@@ -70,5 +72,10 @@ public class JWTUtil {
 		}
 		
 		return claim;
+	}
+
+	public static void invalidateToken(String accessToken) {
+		// TODO Auto-generated method stub
+		
 	}
 }

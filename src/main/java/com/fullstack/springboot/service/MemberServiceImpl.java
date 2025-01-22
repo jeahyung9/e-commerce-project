@@ -1,14 +1,24 @@
 package com.fullstack.springboot.service;
 
+import java.util.LinkedHashMap;
+import java.util.Optional;
 import java.util.stream.Collectors;
 
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.http.HttpEntity;
+import org.springframework.http.HttpHeaders;
+import org.springframework.http.HttpMethod;
+import org.springframework.http.ResponseEntity;
 import org.springframework.security.crypto.password.PasswordEncoder;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
 import org.springframework.web.bind.annotation.RequestParam;
+import org.springframework.web.client.RestTemplate;
+import org.springframework.web.util.UriComponents;
+import org.springframework.web.util.UriComponentsBuilder;
 
 import com.fullstack.springboot.dto.member.MemberDTO;
+import com.fullstack.springboot.dto.member.MemberModifyDTO;
 import com.fullstack.springboot.entity.member.Member;
 import com.fullstack.springboot.repository.MemberRepository;
 
@@ -45,8 +55,6 @@ public class MemberServiceImpl implements MemberService {
         if (memberRepository.findByM_email(memberDto.getM_email()) != null) {
             throw new RuntimeException("이미 존재하는 이메일입니다.");
         }
-    	
-        
         
         String encodedPassword = passwordEncoder.encode(memberDto.getM_pw());
         System.out.println(encodedPassword);
@@ -66,11 +74,7 @@ public class MemberServiceImpl implements MemberService {
                 .totalPay(memberDto.getTotalPay())
                 .membership(memberDto.getMembership())
                 .build();
-        System.out.println("qqqqqqqqqqqqqqqqqqq" + member);
-        member.setPw(encodedPassword);
-        System.out.println(member);
-        memberRepository.save(member);
-        member.setPw(encodedPassword);
+        
         memberRepository.save(member);
         return memberDto;
     }
@@ -115,6 +119,72 @@ public class MemberServiceImpl implements MemberService {
         // 로그인 성공 시 MemberDTO 반환
         return new MemberDTO(member);
     }
+
+    @Override
+    public MemberDTO modifyMember(MemberModifyDTO memberModifyDTO) {
+        // 이메일을 이용해서 회원을 찾기
+        Member member = memberRepository.findByM_email(memberModifyDTO.getM_email());
+
+        if (member == null) {
+            throw new RuntimeException("회원이 존재하지 않습니다.");
+        }
+
+        // 비밀번호 수정
+        if (memberModifyDTO.getM_pw() != null && !memberModifyDTO.getM_pw().isEmpty()) {
+            member.setPw(passwordEncoder.encode(memberModifyDTO.getM_pw()));
+        }
+
+        // 닉네임 수정
+        if (memberModifyDTO.getM_nickname() != null) {
+            member.setM_nickName(memberModifyDTO.getM_nickname());
+        }
+        // 전화번호 수정
+        if (memberModifyDTO.getM_phoNum() != null) {
+            member.setM_phoNum(memberModifyDTO.getM_phoNum());
+        }
+        // 주소 수정
+        if (memberModifyDTO.getDef_addr() != null) {
+            member.setM_def_addr(memberModifyDTO.getDef_addr());
+        }
+
+        // 수정된 정보를 저장
+        memberRepository.save(member);
+
+        // 수정된 정보를 MemberDTO로 반환
+        return new MemberDTO(member);
+    }
+
+	@Override
+	public MemberDTO getMemberInfo(String email) {
+		Member member = memberRepository.findByM_email(email);
+		
+		if (member == null) {
+	        throw new RuntimeException("User not found");
+	    }
+		
+		return new MemberDTO(member);
+	}
+
+	@Override
+	public MemberDTO findByEmail(String email) {
+	    Member member = memberRepository.findByM_email(email);
+	    
+	    if (member == null) {
+	        throw new RuntimeException("User not found");
+	    }
+
+	    // MemberDTO로 변환해서 반환
+	    return new MemberDTO(member);
+	}
+
+	@Override
+	public MemberDTO mypage(String email) {
+		// TODO Auto-generated method stub
+		return null;
+	}
+
+	
+
         
 //        return new MemberDTO(
 //                member.getMno(),
@@ -135,4 +205,6 @@ public class MemberServiceImpl implements MemberService {
 //                    .map(membership -> membership.name()) 
 //                    .collect(Collectors.toSet())
 //            );
+    
+   
     }

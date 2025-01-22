@@ -26,25 +26,25 @@ public class APILoginSuccessHandler implements AuthenticationSuccessHandler {
 		log.error("---------LogIn Success Handler---------");
 		log.error("!!!!!!!!!!!!!!!!!!!!!!!!!!!" + authentication);
 		log.error("---------End Of LogIn Success Handler---------");
-		
 		//인증된 사용자의 detail 을 리턴하는 메서드 호출
 		MemberAuthDTO member = (MemberAuthDTO)authentication.getPrincipal();
 		
-//		Map<String, Object> claims = member.getClaims();
-//		
-//		String accessToken = JWTUtil.genToken(claims, 10);
-//		String refreshToken = JWTUtil.genToken(claims, 1440);
-//		
-//		claims.put("accessToken", accessToken);
-//		claims.put("refreshToken", refreshToken);
-//		
-//		//GSON 객체를 사용해서 Token 을 생성하고, 헤더 정보를 이용해서 응답
+		Map<String, Object> claims = member.getClaims();
+		
+		String accessToken = JWTUtil.genToken(claims, 10);
+		String refreshToken = JWTUtil.genToken(claims, 1440);
+		
+		claims.put("accessToken", accessToken);
+		claims.put("refreshToken", refreshToken);
+		
+		//GSON 객체를 사용해서 Token 을 생성하고, 헤더 정보를 이용해서 응답
 		Gson gson = new Gson();
-//		String jsonStr = gson.toJson(claims);
+		String jsonStr = gson.toJson(claims);
 		
 		response.setContentType("application/json; char=UTF-8");
 		PrintWriter out = response.getWriter();
-//		out.print(jsonStr);
+		
+		out.print(jsonStr);
 		out.close();
 	}
 

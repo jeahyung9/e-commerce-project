@@ -90,14 +90,29 @@ public class Member extends BaseEntity{
         this.isBan = false;
     }
     
-    @PrePersist
-    public void encodePassword() {
-    	if (this.m_pw != null) {
-    		this.m_pw = new BCryptPasswordEncoder().encode(this.m_pw);
-    	}
+//    @PrePersist
+//    public void encodePassword() {
+//    	if (this.m_pw != null) {
+//    		this.m_pw = new BCryptPasswordEncoder().encode(this.m_pw);
+//    	}
+//    }
+    public void setPw(String newPw) {
+    	this.m_pw = newPw;
     }
-    public void setPw(String str) {
-    this.m_pw = str;}
+
+	public void setM_name(String name) {
+		this.m_name = name;
+		
+	}
+	public void setM_phoNum(String phoNum) {
+		this.m_phoNum = phoNum;
+	}
+	public void setM_def_addr(String def_addr) {
+		this.def_addr = def_addr;
+	}
+	public void setM_nickName(String nickName) {
+		this.m_nickName = nickName;
+	}
     
 	
 }
