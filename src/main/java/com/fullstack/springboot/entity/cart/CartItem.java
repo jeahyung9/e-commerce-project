@@ -2,7 +2,7 @@ package com.fullstack.springboot.entity.cart;
 
 import org.hibernate.annotations.ColumnDefault;
 
-import com.fullstack.springboot.entity.product.Product;
+import com.fullstack.springboot.entity.product.OptionDetail;
 
 import jakarta.persistence.Entity;
 import jakarta.persistence.FetchType;
@@ -37,10 +37,10 @@ public class CartItem {
 	   private Cart cart;
 
 	   @ManyToOne(fetch = FetchType.LAZY)
-	   private Product product;
+	   private OptionDetail optionDetail;
 	   
 	   public void changeCnt(int cnt) {
-		   this.c_cnt += cnt;
+		   this.c_cnt = cnt;
 	   }
 	   
 	}

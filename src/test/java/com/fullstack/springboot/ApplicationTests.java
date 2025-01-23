@@ -7,23 +7,26 @@ import java.util.Optional;
 import java.util.Random;
 import java.util.stream.IntStream;
 
-import org.junit.jupiter.api.Test;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.boot.test.context.SpringBootTest;
 
 import com.fullstack.springboot.dto.CartItemDTO;
 import com.fullstack.springboot.dto.member.Membership;
+import com.fullstack.springboot.dto.product.OptionDetailDTO;
+import com.fullstack.springboot.dto.product.ProductDTO;
 import com.fullstack.springboot.entity.cart.Cart;
-import com.fullstack.springboot.entity.cart.CartItem;
 import com.fullstack.springboot.entity.member.Member;
+import com.fullstack.springboot.entity.product.OptionDetail;
 import com.fullstack.springboot.entity.product.Product;
 import com.fullstack.springboot.entity.product.Seller;
 import com.fullstack.springboot.repository.CartItemRepository;
 import com.fullstack.springboot.repository.CartRepository;
-import com.fullstack.springboot.repository.MemberRepository;
-import com.fullstack.springboot.repository.ProductRepository;
 import com.fullstack.springboot.repository.SellerRespository;
+import com.fullstack.springboot.repository.member.MemberRepository;
+import com.fullstack.springboot.repository.product.OptionDetailRepository;
+import com.fullstack.springboot.repository.product.ProductRepository;
 import com.fullstack.springboot.service.CartService;
+import com.fullstack.springboot.service.product.ProductService;
 import com.fullstack.springboot.util.RandomDateUtil;
 
 import jakarta.transaction.Transactional;
@@ -43,6 +46,9 @@ class ApplicationTests {
 	private ProductRepository productRepository;
 	
 	@Autowired
+	private OptionDetailRepository optionDetailRepository;
+	
+	@Autowired
 	private CartRepository cartRepository;
 	
 	@Autowired
@@ -50,6 +56,9 @@ class ApplicationTests {
 	
 	@Autowired
 	private CartService cartService;
+	
+	@Autowired
+	private ProductService productService;
 	
 	//@Test
 	void selCart() {
@@ -119,19 +128,27 @@ class ApplicationTests {
 	}
 	
 	//@Test
-	void insertCartItem() {
+	void insertCartItems() {
+		for(int i = 0; i < 5; i++) {
+			CartItemDTO cartItemDTO = CartItemDTO.builder()
+					.pno(i + 4L)
+					.mno(10L)
+					.c_cnt(i + 1)
+					.build();
+			
+			cartService.register(cartItemDTO);
+		}
+	}
+	
+	//@Test
+	void insertCartItemOne() {
 		CartItemDTO cartItemDTO = CartItemDTO.builder()
-				.pno(101L)
-				.mno(99L)
-				.cno(7L)
-				.c_cnt(3)
+				.pno(204L)
+				.mno(10L)
+				.c_cnt(2)
 				.build();
 		
-		List<CartItemDTO> cartItem = cartService.register(cartItemDTO);
-		
-		for(CartItemDTO dto : cartItem) {
-			log.error(dto);
-		}
+		cartService.register(cartItemDTO);
 	}
 	
 	//@Test
@@ -158,16 +175,73 @@ class ApplicationTests {
 			Product product = Product.builder()
 					.p_name("상품" + i)
 					.p_content("이 상품은 상품" + i + "입니다")
-					.p_img("image.jpg")
 					.p_price(10000L)
-					.p_salePer(30)
-					.p_stock((int)((Math.random() * 30) + 1))
+					.p_salePer((int)((Math.random() * 50) + 1))
+					.p_stock(0)
 					.p_salesVol((int)((Math.random() * 20) + 1))
+					.delFlag(false)
 					.seller(seller)
 					.build();
 			
 			productRepository.save(product);
 		});
+	}
+	
+	//@Test
+	void insertOption() {
+		for(int i = 1; i <= 100; i++) {
+			int optionCnt = (int)((Math.random() * 4) + 1);
+			Long[] price = {1000L, 2000L, 3000L};
+			int totalStock = 0;
+			
+			Optional<Product> result = productRepository.getProductInfo((long)i);
+			Product product = result.orElseThrow();
+			Long pno = product.getPno();
+			if(optionCnt == 1) {
+				int stock = (int)((Math.random() * 20) + 1);
+				OptionDetail od = OptionDetail.builder()
+						.od_name(product.getP_name())
+						.od_stock(stock)
+						.od_price(price[(int)(Math.random() * 3)])
+						.product(product)
+						.build();
+				product.changeStock(stock);
+				optionDetailRepository.save(od);
+				productRepository.save(product);
+				continue;
+			}else {
+				for(int j = 1; j <= optionCnt; j++) {
+					int stock = (int)((Math.random() * 20) + 1);
+					OptionDetail od = OptionDetail.builder()
+							.od_name("상품" + i + " 옵션" + j)
+							.od_stock(stock)
+							.od_price(price[(int)(Math.random() * 3)])
+							.product(product)
+							.build();
+					optionDetailRepository.save(od);
+					totalStock += stock;
+				}
+			}
+			
+			product.changeStock(totalStock);
+			productRepository.save(product);
+		}
+	}
+	
+	//@Test
+	void getProductWithOption() {
+		List<OptionDetailDTO> list = optionDetailRepository.getProductWithOption(5L);
+		
+		for(OptionDetailDTO dto : list) {
+			log.error(dto);
+		}
+	}
+	
+	//@Test
+	void getOne() {
+		ProductDTO dto = productService.readProduct(5L);
+		
+		log.error(dto);
 	}
 	
 	//@Test

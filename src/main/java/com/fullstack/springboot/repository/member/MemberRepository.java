@@ -1,4 +1,4 @@
-package com.fullstack.springboot.repository;
+package com.fullstack.springboot.repository.member;
 
 import org.springframework.data.jpa.repository.JpaRepository;
 

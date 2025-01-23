@@ -1,4 +1,6 @@
-package com.fullstack.springboot.dto;
+package com.fullstack.springboot.dto.member;
+
+import com.fullstack.springboot.dto.CartItemDTO;
 
 import lombok.AllArgsConstructor;
 import lombok.Builder;
@@ -9,20 +11,15 @@ import lombok.NoArgsConstructor;
 @Builder
 @NoArgsConstructor
 @AllArgsConstructor
-public class CartItemDTO {
-	
-	private Long cino;
-	private Long odno;
+public class WishListDTO {
+
+	private Long wno;
 	private Long pno;
 	private Long sno;
-	private Long cno;
 	private Long mno;
 	private String p_name;
-	private String od_name;
 	private Long p_price;
 	private int p_salePer;
 	private String businessName;
-	private int c_cnt;
 	private int p_stock;
-
 }
