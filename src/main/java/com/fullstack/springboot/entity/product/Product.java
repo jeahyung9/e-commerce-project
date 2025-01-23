@@ -1,5 +1,8 @@
 package com.fullstack.springboot.entity.product;
 
+import java.util.ArrayList;
+import java.util.List;
+
 import com.fullstack.springboot.entity.BaseEntity;
 
 import jakarta.persistence.Column;
@@ -35,8 +38,6 @@ public class Product extends BaseEntity {
 	
 	private String p_content; // 내용
 	
-	private String p_img; // 이미지
-	
 	@Column(nullable = false)
 	private Long p_price; // 가격
 	
@@ -47,13 +48,41 @@ public class Product extends BaseEntity {
 	
 	private int p_salesVol; // 판매량
 	
-	@ManyToOne(fetch = FetchType.LAZY)
-	private Seller seller; // 판매자
+	private boolean delFlag;
 	
-	@OneToMany(fetch = FetchType.LAZY)
-	private Option option; //옵션
-
-	//@OneToMany(fetch = FetchType.LAZY)
-	//private ProductImage productImage;
-
+	@ManyToOne(fetch = FetchType.LAZY)
+	private Seller seller; // 판매자 
+	
+	@OneToMany(fetch = FetchType.LAZY, mappedBy="pino")
+	private List<ProductImage> productImage = new ArrayList<>();
+	
+	@OneToMany(fetch = FetchType.LAZY, mappedBy = "odno")
+	private List<OptionDetail> optionDetails = new ArrayList<>();
+	
+	public void changeDel(boolean delFlag) {
+		this.delFlag = delFlag;
+	}
+	public void changeName(String name) {
+		this.p_name = name;
+	}
+	
+	public void changePrice(Long price) {
+		this.p_price = price;
+	}
+	
+	public void changeContent(String content) {
+		this.p_content = content;
+	}
+	
+	public void totalStockCount() {
+		int totalStock = optionDetails.stream().mapToInt(OptionDetail::getOd_stock).sum();
+		
+		this.p_stock=totalStock;
+	}
+	
+	//내가 추가 테스트
+	public void changeStock(int stock) {
+		this.p_stock = stock;
+	}
+	
 }
