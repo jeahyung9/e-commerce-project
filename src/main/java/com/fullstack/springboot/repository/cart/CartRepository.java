@@ -1,4 +1,4 @@
-package com.fullstack.springboot.repository;
+package com.fullstack.springboot.repository.cart;
 
 import java.util.List;
 import java.util.Optional;

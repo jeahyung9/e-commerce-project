@@ -10,7 +10,7 @@ import java.util.stream.IntStream;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.boot.test.context.SpringBootTest;
 
-import com.fullstack.springboot.dto.CartItemDTO;
+import com.fullstack.springboot.dto.cart.CartItemDTO;
 import com.fullstack.springboot.dto.member.Membership;
 import com.fullstack.springboot.dto.product.OptionDetailDTO;
 import com.fullstack.springboot.dto.product.ProductDTO;
@@ -19,13 +19,13 @@ import com.fullstack.springboot.entity.member.Member;
 import com.fullstack.springboot.entity.product.OptionDetail;
 import com.fullstack.springboot.entity.product.Product;
 import com.fullstack.springboot.entity.product.Seller;
-import com.fullstack.springboot.repository.CartItemRepository;
-import com.fullstack.springboot.repository.CartRepository;
 import com.fullstack.springboot.repository.SellerRespository;
+import com.fullstack.springboot.repository.cart.CartItemRepository;
+import com.fullstack.springboot.repository.cart.CartRepository;
 import com.fullstack.springboot.repository.member.MemberRepository;
 import com.fullstack.springboot.repository.product.OptionDetailRepository;
 import com.fullstack.springboot.repository.product.ProductRepository;
-import com.fullstack.springboot.service.CartService;
+import com.fullstack.springboot.service.cart.CartService;
 import com.fullstack.springboot.service.product.ProductService;
 import com.fullstack.springboot.util.RandomDateUtil;
 

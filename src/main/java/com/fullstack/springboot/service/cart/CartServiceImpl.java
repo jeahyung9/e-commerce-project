@@ -1,4 +1,4 @@
-package com.fullstack.springboot.service;
+package com.fullstack.springboot.service.cart;
 
 import java.util.List;
 import java.util.Optional;
@@ -6,14 +6,14 @@ import java.util.Optional;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
-import com.fullstack.springboot.dto.CartDTO;
-import com.fullstack.springboot.dto.CartItemDTO;
+import com.fullstack.springboot.dto.cart.CartDTO;
+import com.fullstack.springboot.dto.cart.CartItemDTO;
 import com.fullstack.springboot.entity.cart.Cart;
 import com.fullstack.springboot.entity.cart.CartItem;
 import com.fullstack.springboot.entity.member.Member;
 import com.fullstack.springboot.entity.product.OptionDetail;
-import com.fullstack.springboot.repository.CartItemRepository;
-import com.fullstack.springboot.repository.CartRepository;
+import com.fullstack.springboot.repository.cart.CartItemRepository;
+import com.fullstack.springboot.repository.cart.CartRepository;
 
 import jakarta.transaction.Transactional;
 import lombok.RequiredArgsConstructor;

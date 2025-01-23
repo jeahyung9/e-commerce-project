@@ -1,4 +1,4 @@
-package com.fullstack.springboot.controller;
+package com.fullstack.springboot.controller.cart;
 
 import java.util.List;
 
@@ -11,8 +11,8 @@ import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
 
-import com.fullstack.springboot.dto.CartItemDTO;
-import com.fullstack.springboot.service.CartService;
+import com.fullstack.springboot.dto.cart.CartItemDTO;
+import com.fullstack.springboot.service.cart.CartService;
 
 import lombok.RequiredArgsConstructor;
 import lombok.extern.log4j.Log4j2;

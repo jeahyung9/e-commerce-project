@@ -1,4 +1,4 @@
-package com.fullstack.springboot.dto;
+package com.fullstack.springboot.dto.cart;
 
 import lombok.AllArgsConstructor;
 import lombok.Builder;

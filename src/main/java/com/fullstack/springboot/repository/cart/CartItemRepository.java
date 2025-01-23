@@ -1,4 +1,4 @@
-package com.fullstack.springboot.repository;
+package com.fullstack.springboot.repository.cart;
 
 import java.util.List;
 
@@ -6,7 +6,7 @@ import org.springframework.data.jpa.repository.JpaRepository;
 import org.springframework.data.jpa.repository.Query;
 import org.springframework.data.repository.query.Param;
 
-import com.fullstack.springboot.dto.CartItemDTO;
+import com.fullstack.springboot.dto.cart.CartItemDTO;
 import com.fullstack.springboot.entity.cart.CartItem;
 
 public interface CartItemRepository extends JpaRepository<CartItem, Long> {
