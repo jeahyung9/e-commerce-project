@@ -17,7 +17,7 @@ import lombok.RequiredArgsConstructor;
 
 @RestController
 @RequiredArgsConstructor
-@RequestMapping("/pick")
+@RequestMapping("/api/pick")
 public class WishListController {
 	
 	@Autowired

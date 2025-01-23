@@ -12,7 +12,7 @@ import com.fullstack.springboot.entity.cart.CartItem;
 public interface CartItemRepository extends JpaRepository<CartItem, Long> {
 
 	@Query("select " +
-	"new com.fullstack.springboot.dto.CartItemDTO(ci.cino, od.odno, p.pno, s.sno, c.cno, c.member.mno, p.p_name, od.od_name, p.p_price, p.p_salePer, s.businessName, ci.c_cnt, p.p_stock) from " +
+	"new com.fullstack.springboot.dto.cart.CartItemDTO(ci.cino, od.odno, p.pno, s.sno, c.cno, c.member.mno, p.p_name, od.od_name, p.p_price, p.p_salePer, s.businessName, ci.c_cnt, p.p_stock) from " +
 	"CartItem ci inner join Cart c on ci.cart = c " +
 	"left join OptionDetail od on ci.optionDetail = od " +
 	"left join Product p on od.product = p " +
