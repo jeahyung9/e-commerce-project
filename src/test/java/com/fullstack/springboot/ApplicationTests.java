@@ -16,14 +16,11 @@ import com.fullstack.springboot.dto.member.Membership;
 import com.fullstack.springboot.entity.cart.Cart;
 import com.fullstack.springboot.entity.cart.CartItem;
 import com.fullstack.springboot.entity.member.Member;
+import com.fullstack.springboot.entity.product.OptionDetail;
 import com.fullstack.springboot.entity.product.Product;
 import com.fullstack.springboot.entity.product.Seller;
-import com.fullstack.springboot.repository.CartItemRepository;
-import com.fullstack.springboot.repository.CartRepository;
 import com.fullstack.springboot.repository.MemberRepository;
-import com.fullstack.springboot.repository.ProductRepository;
 import com.fullstack.springboot.repository.SellerRespository;
-import com.fullstack.springboot.service.CartService;
 import com.fullstack.springboot.util.RandomDateUtil;
 
 import jakarta.transaction.Transactional;
@@ -39,28 +36,31 @@ class ApplicationTests {
 	@Autowired
 	private SellerRespository sellerRespository;
 	
-	@Autowired
-	private ProductRepository productRepository;
+//	@Autowired
+//	private ProductRepository productRepository;
+//	
+//	@Autowired
+//	private OptionDetailRepository optionDetailRepository;
 	
-	@Autowired
-	private CartRepository cartRepository;
-	
-	@Autowired
-	private CartItemRepository cartItemRepository;
-	
-	@Autowired
-	private CartService cartService;
+//	@Autowired
+//	private CartRepository cartRepository;
+//	
+//	@Autowired
+//	private CartItemRepository cartItemRepository;
+//	
+	//@Autowired
+	//private CartService cartService;
 	
 	//@Test
-	void selCart() {
-		Optional<Cart> option = cartRepository.getCart(10L);
-		
-		if(option.isEmpty()) {
-			log.error("비었음");
-		}else {
-			log.error("카트");
-		}
-	}
+//	void selCart() {
+//		Optional<Cart> option = cartRepository.getCart(10L);
+//		
+//		if(option.isEmpty()) {
+//			log.error("비었음");
+//		}else {
+//			log.error("카트");
+//		}
+//	}
 	
 	//@Test
 	void insertMember() {
@@ -110,29 +110,29 @@ class ApplicationTests {
 	}
 	
 	//@Test
-	void insertCart() {
-		Member member = Member.builder().mno(15L).build();
-		Cart cart = Cart.builder()
-				.member(member)
-				.build();
-		cartRepository.save(cart);
-	}
+//	void insertCart() {
+//		Member member = Member.builder().mno(15L).build();
+//		Cart cart = Cart.builder()
+//				.member(member)
+//				.build();
+//		cartRepository.save(cart);
+//	}
 	
 	//@Test
-	void insertCartItem() {
-		CartItemDTO cartItemDTO = CartItemDTO.builder()
-				.pno(101L)
-				.mno(99L)
-				.cno(7L)
-				.c_cnt(3)
-				.build();
-		
-		List<CartItemDTO> cartItem = cartService.register(cartItemDTO);
-		
-		for(CartItemDTO dto : cartItem) {
-			log.error(dto);
-		}
-	}
+//	void insertCartItem() {
+//		CartItemDTO cartItemDTO = CartItemDTO.builder()
+//				.pno(101L)
+//				.mno(99L)
+//				.cno(7L)
+//				.c_cnt(3)
+//				.build();
+//		
+//		//List<CartItemDTO> cartItem = cartService.register(cartItemDTO);
+//		
+//		for(CartItemDTO dto : cartItem) {
+//			log.error(dto);
+//		}
+//	}
 	
 	//@Test
 	void insertSeller() {
@@ -155,30 +155,71 @@ class ApplicationTests {
 	void insertProduct() {
 		IntStream.rangeClosed(1, 100).forEach(i -> {
 			Seller seller = Seller.builder().sno((long)((Math.random() * 30) + 1)).build();
-			Product product = Product.builder()
-					.p_name("상품" + i)
-					.p_content("이 상품은 상품" + i + "입니다")
-					.p_img("image.jpg")
-					.p_price(10000L)
-					.p_salePer(30)
-					.p_stock((int)((Math.random() * 30) + 1))
-					.p_salesVol((int)((Math.random() * 20) + 1))
-					.seller(seller)
-					.build();
-			
-			productRepository.save(product);
+//			Product product = Product.builder()
+//					.p_name("상품" + i)
+//					.p_content("이 상품은 상품" + i + "입니다")
+//					.p_img("image.jpg")
+//					.p_price(10000L)
+//					.p_salePer(30)
+//					.p_stock((int)((Math.random() * 30) + 1))
+//					.p_salesVol((int)((Math.random() * 20) + 1))
+//					.seller(seller)
+//					.build();
+//			
+//			productRepository.save(product);
 		});
 	}
 	
 	//@Test
-	@Transactional
-	void selectCart() {
-		List<CartItemDTO> cartItemList = cartItemRepository.getCartItems(10L);
-		
-		for(CartItemDTO dto : cartItemList) {
-			log.info(dto);
-		}
-		
-	}
+	//@Transactional
+//	void selectCart() {
+//		List<CartItemDTO> cartItemList = cartItemRepository.getCartItems(10L);
+//		
+//		for(CartItemDTO dto : cartItemList) {
+//			log.info(dto);
+//		}
+//		
+//	}
+	
+//	@Test
+//	void insertOption() {
+//		for(int i = 1; i <= 100; i++) {
+//			int optionCnt = (int)((Math.random() * 4) + 1);
+//			Long[] price = {1000L, 2000L, 3000L};
+//			int totalStock = 0;
+//			
+//			Optional<Product> result = productRepository.getProductInfo((long)i);
+//			Product product = result.orElseThrow();
+//			Long pno = product.getPno();
+//			if(optionCnt == 1) {
+//				int stock = (int)((Math.random() * 20) + 1);
+//				OptionDetail od = OptionDetail.builder()
+//						.od_name(product.getP_name())
+//						.od_stock(stock)
+//						.od_price(price[(int)(Math.random() * 3)])
+//						.product(product)
+//						.build();
+//				product.changeStock(stock);
+//				optionDetailRepository.save(od);
+//				productRepository.save(product);
+//				continue;
+//			}else {
+//				for(int j = 1; j <= optionCnt; j++) {
+//					int stock = (int)((Math.random() * 20) + 1);
+//					OptionDetail od = OptionDetail.builder()
+//							.od_name("상품" + i + " 옵션" + j)
+//							.od_stock(stock)
+//							.od_price(price[(int)(Math.random() * 3)])
+//							.product(product)
+//							.build();
+//					optionDetailRepository.save(od);
+//					totalStock += stock;
+//				}
+//			}
+//			
+//			product.changeStock(totalStock);
+//			productRepository.save(product);
+//		}
+//	}
 
 }
