@@ -1,6 +1,6 @@
 package com.fullstack.springboot.dto.review;
 
-import com.fullstack.springboot.dto.CartDTO;
+import java.time.LocalDateTime;
 
 import lombok.AllArgsConstructor;
 import lombok.Builder;
@@ -18,6 +18,7 @@ public class ReviewDTO {
 	private String content;
 	private int rate;
 	private Long reviewLike;
+	private LocalDateTime regDate;
 	private Long odno;
 	private String od_name;
 	private Long pno;

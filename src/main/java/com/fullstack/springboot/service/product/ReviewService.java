@@ -1,15 +1,14 @@
 package com.fullstack.springboot.service.product;
 
-import org.springframework.data.domain.Page;
-import org.springframework.data.domain.Pageable;
-
+import com.fullstack.springboot.dto.PageRequestDTO;
+import com.fullstack.springboot.dto.PageResponseDTO;
 import com.fullstack.springboot.dto.review.ReviewDTO;
 
 public interface ReviewService {
 	
-	public Page<ReviewDTO> getReview(Long pno, Pageable pageable);
+	public PageResponseDTO<ReviewDTO> getReview(Long pno, PageRequestDTO pageRequestDTO);
 	
-	public Page<ReviewDTO> getReviewRate(int rate, Pageable pageable);
+	public PageResponseDTO<ReviewDTO> getReviewRate(Long pno, int rate, PageRequestDTO pageRequestDTO);
 	
 	public ReviewDTO getReviewOne(Long rno);
 	

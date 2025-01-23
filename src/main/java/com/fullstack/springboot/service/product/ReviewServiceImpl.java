@@ -1,9 +1,17 @@
 package com.fullstack.springboot.service.product;
 
+import java.util.List;
+import java.util.stream.Collectors;
+
+import org.modelmapper.ModelMapper;
 import org.springframework.data.domain.Page;
+import org.springframework.data.domain.PageRequest;
 import org.springframework.data.domain.Pageable;
+import org.springframework.data.domain.Sort;
 import org.springframework.stereotype.Service;
 
+import com.fullstack.springboot.dto.PageRequestDTO;
+import com.fullstack.springboot.dto.PageResponseDTO;
 import com.fullstack.springboot.dto.review.ReviewDTO;
 import com.fullstack.springboot.entity.member.Member;
 import com.fullstack.springboot.entity.product.OptionDetail;
@@ -16,16 +24,57 @@ import lombok.RequiredArgsConstructor;
 @RequiredArgsConstructor
 public class ReviewServiceImpl implements ReviewService {
 	
+	private final ModelMapper modelMapper;
+	
 	private final ReviewRepository reviewRepository;
 	
 	@Override
-	public Page<ReviewDTO> getReview(Long pno, Pageable pageable) {
-		return reviewRepository.getReview(pno, pageable);
+	public PageResponseDTO<ReviewDTO> getReview(Long pno, PageRequestDTO pageRequestDTO) {
+		Pageable pageable =
+				PageRequest.of(
+						pageRequestDTO.getPage() - 1,
+						pageRequestDTO.getSize(),
+						Sort.by(pageRequestDTO.getSortBy()).descending());
+		Page<ReviewDTO> page = reviewRepository.getReview(pno, pageable);
+		
+		List<ReviewDTO> dtoList = page.getContent().stream()
+			      .map(review -> modelMapper.map(review, ReviewDTO.class))
+			      .collect(Collectors.toList());
+		
+		long totalCount = page.getTotalElements();
+		
+		PageResponseDTO<ReviewDTO> responseDTO = PageResponseDTO.<ReviewDTO>withAll()
+			      .dtoList(dtoList)
+			      .pageRequestDTO(pageRequestDTO)
+			      .totalCount(totalCount)
+			      .build();
+		
+		System.out.println("되냐? ㅇㅇ?");
+		return responseDTO;
 	}
 	
 	@Override
-	public Page<ReviewDTO> getReviewRate(int rate, Pageable pageable) {
-		return reviewRepository.getReviewRate(rate, pageable);
+	public PageResponseDTO<ReviewDTO> getReviewRate(Long pno, int rate, PageRequestDTO pageRequestDTO) {
+		Pageable pageable =
+				PageRequest.of(
+						pageRequestDTO.getPage() - 1,
+						pageRequestDTO.getSize(),
+						Sort.by(pageRequestDTO.getSortBy()).descending());
+		Page<ReviewDTO> page = reviewRepository.getReviewRate(pno, rate, pageable);
+		
+		List<ReviewDTO> dtoList = page.getContent().stream()
+			      .map(review -> modelMapper.map(review, ReviewDTO.class))
+			      .collect(Collectors.toList());
+		
+		long totalCount = page.getTotalElements();
+		
+		PageResponseDTO<ReviewDTO> responseDTO = PageResponseDTO.<ReviewDTO>withAll()
+			      .dtoList(dtoList)
+			      .pageRequestDTO(pageRequestDTO)
+			      .totalCount(totalCount)
+			      .build();
+		
+		return responseDTO;
 	}
 	
 	@Override

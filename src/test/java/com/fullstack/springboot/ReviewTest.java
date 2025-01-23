@@ -9,6 +9,8 @@ import org.springframework.data.domain.Pageable;
 import org.springframework.data.domain.Sort;
 import org.springframework.data.domain.Sort.Order;
 
+import com.fullstack.springboot.dto.PageRequestDTO;
+import com.fullstack.springboot.dto.PageResponseDTO;
 import com.fullstack.springboot.dto.review.ReviewDTO;
 import com.fullstack.springboot.entity.member.Member;
 import com.fullstack.springboot.entity.product.OptionDetail;
@@ -37,13 +39,20 @@ public class ReviewTest {
 	
 	//@Test
 	void insert() {
-		for(int i = 0; i < 100; i++) {
+		for(int i = 0; i < 200; i++) {
+			String str = "내용 " + i + "   ";
+			String dummy = "";
+			int random = (int)(Math.random() * 100);
+			for(int j = 0; j < random; j++) {
+				dummy += str;
+			}
+			
 			ReviewDTO dto = ReviewDTO.builder()
 					.title("타이틀 " + (i + 1))
-					.content("내용 " + (i + 1))
+					.content(dummy)
 					.rate((int)(Math.random() * 6))
-					.mno(10L)
-					.odno((long)(Math.random() * 3) + 1)
+					.mno((long)(Math.random() * 90) + 1)
+					.odno((long)(Math.random() * 4) + 1)
 					.build();
 			reviewService.register(dto);
 		}
@@ -76,11 +85,11 @@ public class ReviewTest {
 	
 	//@Test
 	void getReview() {
-		Pageable pageable = PageRequest.of(0, 100, Sort.by(Order.asc("od.od_name")));
-		Page<ReviewDTO> list = reviewRepository.getReview(1L, pageable);
-		for(ReviewDTO dto : list) {
-			System.out.println(dto);
-		}
+		//PageRequestDTO pageable = PageRequest.of(0, 100, Sort.by(Order.asc("od.od_name")));
+		//PageResponseDTO<ReviewDTO> list = reviewRepository.getReview(1L, pageable);
+		//for(ReviewDTO dto : list.getDtoList()) {
+			//System.out.println(dto);
+		//}
 	}
 	
 	//@Test

@@ -1,11 +1,8 @@
 package com.fullstack.springboot.entity.review;
 
-import org.hibernate.annotations.ColumnDefault;
-
 import com.fullstack.springboot.entity.BaseEntity;
 import com.fullstack.springboot.entity.member.Member;
 import com.fullstack.springboot.entity.product.OptionDetail;
-import com.fullstack.springboot.entity.product.Product;
 
 import jakarta.persistence.Column;
 import jakarta.persistence.Entity;
@@ -36,6 +33,7 @@ public class ProductReview extends BaseEntity {
 	
 	private String title;
 	
+	@Column(length = 10000)
 	private String content;
 	
 	private int rate; // 별점 (구매자가 다는 리뷰)
