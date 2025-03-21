@@ -13,6 +13,11 @@ java {
 	}
 }
 
+// 컴파일러 옵션 추가
+//compileJava {
+//    options.compilerArgs += ['-parameters']
+//}
+
 configurations {
 	compileOnly {
 		extendsFrom annotationProcessor
@@ -34,13 +39,17 @@ dependencies {
 	testImplementation 'org.springframework.boot:spring-boot-starter-test'
 	testImplementation 'org.springframework.security:spring-security-test'
 	testRuntimeOnly 'org.junit.platform:junit-platform-launcher'
+	implementation group: 'net.coobird', name: 'thumbnailator', version: '0.4.19'
 	
 	//JSON 문자열 토큰을 이용하는 라이브러리 추가. GSON 것을 많이 씀
 	implementation 'com.google.code.gson:gson:2.11.0'
 	implementation group: 'io.jsonwebtoken', name: 'jjwt', version: '0.12.6'
 	
-	//modelmapper 의존성추가
+	//modelmapper 의존성 추가
 	implementation 'org.modelmapper:modelmapper:3.1.1'
+	
+	//validation 의존성 추가
+	implementation 'org.springframework.boot:spring-boot-starter-validation'
 }
 
 tasks.named('test') {
