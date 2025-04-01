@@ -50,7 +50,7 @@ public class ReviewTest {
 		reviewService.register(orno, dto);
 	}
 	
-	@Test
+	//@Test
 	void insert() {
 		String[] reviewTitles = {
 				"제품 사용 후 만족도 최고입니다!",

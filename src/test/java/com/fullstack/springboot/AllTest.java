@@ -79,7 +79,7 @@ public class AllTest {
 	@Autowired
 	private OrderDetailRepository orderDetailRepository;
 	
-	@Test
+	//@Test
 	void insertMember() {
 		
 		Random random = new Random();
@@ -124,7 +124,7 @@ public class AllTest {
 		
 	}
 	
-	@Test
+	//@Test
 	void insertSeller() {
 		String encodedPassword = passwordEncoder.encode("1111");
 		for(int i = 1; i <= 5; i++) {
@@ -142,8 +142,8 @@ public class AllTest {
 		}
 	}
 	
-	@Test 
-	@Transactional
+	//@Test 
+	//@Transactional
 	void addSellerAuth() {
 		for(int i = 1; i <= 5; i++) {
 			Seller seller = sellerRepository.findById((long)i).get();

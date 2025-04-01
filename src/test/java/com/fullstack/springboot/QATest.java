@@ -34,7 +34,7 @@ public class QATest {
 	@Autowired
 	private ProductQAReplyRepository productQAReplyRepository;
 	
-	@Test
+	//@Test
 	void insertQA() {
 		String[] title = {
 	            "상품에 대한 자세한 설명 부탁드립니다.",

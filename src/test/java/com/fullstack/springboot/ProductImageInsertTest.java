@@ -30,7 +30,7 @@ public class ProductImageInsertTest {
 	@Value("${com.fullstack.springboot.uploadPath}")
 	private String uploadPath;
 
-	@Test
+	// @Test
 	void insertImage() {
 		for(int i = 1; i <= 30; i++) {
 			//여성 의류 - 3, 여성 신발 - 4, 여성 가방/잡화 - 5
